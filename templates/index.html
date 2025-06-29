@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nova AI</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="chat-container">
+    <h1>🧠 Nova AI</h1>
+    <div id="chat-box"></div>
+    <input type="text" id="user-input" placeholder="Ask me anything..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <script>
+    async function sendMessage() {
+      const input = document.getElementById("user-input");
+      const message = input.value;
+      const chatBox = document.getElementById("chat-box");
+
+      if (!message.trim()) return;
+
+      chatBox.innerHTML += `<div class='user'>You: ${message}</div>`;
+      input.value = "";
+
+      const botDiv = document.createElement("div");
+      botDiv.className = "bot";
+      const typingSpan = document.createElement("span");
+      typingSpan.id = "typing";
+      botDiv.innerHTML = "Nova: ";
+      botDiv.appendChild(typingSpan);
+      chatBox.appendChild(botDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      const res = await fetch("/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: message })
+      });
+
+      const data = await res.json();
+      const fullReply = data.response;
+
+      let i = 0;
+      const speed = 10;
+
+      function type() {
+        if (i < fullReply.length) {
+          typingSpan.innerHTML += fullReply.charAt(i);
+          i++;
+          chatBox.scrollTop = chatBox.scrollHeight;
+          setTimeout(type, speed);
+        }
+      }
+
+      type();
+    }
+
+    // 💬 Enter to send, Shift+Enter for new line
+    document.getElementById("user-input").addEventListener("keydown", function (e) {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+ 
