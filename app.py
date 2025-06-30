@@ -6,7 +6,7 @@ import os
 app = Flask(__name__)
 genai.configure(api_key="AIzaSyC7iaJKq0BBUxTdOODLGUPpYZyu_0rV09c")
 
-model = genai.GenerativeModel("models/gemma-3-27b-it")
+model = genai.GenerativeModel("models/gemma-3-1b-it")
 
 @app.route("/")
 def home():
