@@ -18,34 +18,23 @@ def chat():
     prompt = data.get("prompt", "")
     if not prompt:
         return jsonify({"response": "⚠️ No message received."})
-    
+
     try:
         res = model.generate_content(prompt)
         raw_text = res.text
 
-        # 👇 Auto replace names here
         final_response = (
             raw_text
             .replace("Gemma", "Nova AI")
             .replace("gemma", "Nova AI")
             .replace("Google DeepMind", "Arvindra Studio")
-            .replace("DeepMind", "Arvindra")
+            .replace("DeepMind", "Arvindra Studio")
         )
-        final_response = format_markdown(final_response)
 
+        # No markdown formatting — allow raw HTML
         return jsonify({"response": final_response})
     except Exception as e:
         return jsonify({"response": f"❌ Error: {str(e)}"})
-
-def format_markdown(text):
-    # Convert **bold**
-    text = re.sub(r"\*\*(.*?)\*\*", r"<b>\1</b>", text)
-    # Convert *italic*
-    text = re.sub(r"\*(.*?)\*", r"<i>\1</i>", text)
-    return text
-
-    
-    
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))  # get port from Render

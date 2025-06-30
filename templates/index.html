@@ -43,22 +43,38 @@
       const data = await res.json();
       const fullReply = data.response;
 
-      let i = 0;
-      const speed = 15;
+      const tempDiv = document.createElement("div");
+      tempDiv.innerHTML = fullReply;
+      const parsed = tempDiv.childNodes;
 
-      function type() {
-        if (i < fullReply.length) {
-          typingSpan.innerHTML += fullReply.charAt(i);
-          i++;
-          chatBox.scrollTop = chatBox.scrollHeight;
-          setTimeout(type, speed);
+      function typeHTML(nodeList, currentNodeIndex = 0, currentCharIndex = 0, parent = typingSpan) {
+        if (currentNodeIndex >= nodeList.length) return;
+
+        const node = nodeList[currentNodeIndex];
+
+        if (node.nodeType === Node.TEXT_NODE) {
+          const text = node.textContent;
+          if (currentCharIndex < text.length) {
+            parent.innerHTML += text.charAt(currentCharIndex);
+            chatBox.scrollTop = chatBox.scrollHeight;
+            setTimeout(() => {
+              typeHTML(nodeList, currentNodeIndex, currentCharIndex + 1, parent);
+            }, 15);
+          } else {
+            typeHTML(nodeList, currentNodeIndex + 1, 0, parent);
+          }
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          const clone = document.createElement(node.tagName);
+          parent.appendChild(clone);
+          typeHTML(node.childNodes, 0, 0, clone);
+          typeHTML(nodeList, currentNodeIndex + 1, 0, parent);
         }
       }
 
-      type();
+      typeHTML(parsed);
     }
 
-    // 💬 Enter to send, Shift+Enter for new line
+    // Press Enter to send
     document.getElementById("user-input").addEventListener("keydown", function (e) {
       if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault();
