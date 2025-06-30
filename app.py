@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import google.generativeai as genai
 import re
+import os
 
 app = Flask(__name__)
 genai.configure(api_key="AIzaSyC7iaJKq0BBUxTdOODLGUPpYZyu_0rV09c")
@@ -47,4 +48,5 @@ def format_markdown(text):
     
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # get port from Render
+    app.run(host="0.0.0.0", port=port)
