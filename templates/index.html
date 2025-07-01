@@ -7,11 +7,14 @@
   <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
-  <div class="chat-container">
-    <h1>🧠 Nova AI</h1>
-    <div id="chat-box"></div>
-    <input type="text" id="user-input" placeholder="Ask me anything..." />
-    <button onclick="sendMessage()">Send</button>
+  <div class="main-wrapper">
+    <div class="chat-container">
+      <h1>🧠 Nova AI</h1>
+      <div id="timer" class="timer-display"></div>
+      <div id="chat-box"></div>
+      <input type="text" id="user-input" placeholder="Ask me anything..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
   </div>
 
   <script>
@@ -19,6 +22,7 @@
       const input = document.getElementById("user-input");
       const message = input.value;
       const chatBox = document.getElementById("chat-box");
+      const timerDisplay = document.getElementById("timer");
 
       if (!message.trim()) return;
 
@@ -28,11 +32,17 @@
       const botDiv = document.createElement("div");
       botDiv.className = "bot";
       const typingSpan = document.createElement("span");
-      typingSpan.id = "typing";
-      botDiv.innerHTML = "Nova: ";
       botDiv.appendChild(typingSpan);
+
+      const dot = document.createElement("span");
+      dot.className = "typing-dot";
+      typingSpan.appendChild(dot);
+
       chatBox.appendChild(botDiv);
       chatBox.scrollTop = chatBox.scrollHeight;
+
+      const startTime = performance.now();
+      timerDisplay.textContent = "⏳ Waiting...";
 
       const res = await fetch("/chat", {
         method: "POST",
@@ -42,6 +52,10 @@
 
       const data = await res.json();
       const fullReply = data.response;
+
+      const endTime = performance.now();
+      const duration = ((endTime - startTime) / 1000).toFixed(2);
+      timerDisplay.textContent = `⏱️ Responded in ${duration}s`;
 
       const tempDiv = document.createElement("div");
       tempDiv.innerHTML = fullReply;
@@ -74,7 +88,6 @@
       typeHTML(parsed);
     }
 
-    // Press Enter to send
     document.getElementById("user-input").addEventListener("keydown", function (e) {
       if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault();
@@ -84,6 +97,8 @@
   </script>
 </body>
 </html>
+
+
 
 
  
