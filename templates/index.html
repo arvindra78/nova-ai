@@ -8,7 +8,65 @@
 
   <!-- 🔥 Google AdSense Auto Ads -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1830051360409760"
-     crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow-x: hidden;
+      font-family: sans-serif;
+      background: #f4f4f4;
+    }
+
+    .main-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 30px 15px;
+    }
+
+    .chat-container {
+      width: 100%;
+      max-width: 600px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    }
+
+    #chat-box {
+      max-height: 400px;
+      overflow-y: auto;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 
 <body>
@@ -30,7 +88,7 @@
       <button onclick="sendMessage()">Send</button>
 
       <!-- 💸 Adsterra Banner Below Chat -->
-      <div style="text-align: center; margin-top: 20px;">
+      <div style="text-align: center; margin-top: 20px; min-height: 250px;">
         <script type="text/javascript">
           atOptions = {
             'key': '4a7874126c1fbbe640e4d51fc61d5fe6',
@@ -42,8 +100,8 @@
         </script>
         <script type="text/javascript" src="//www.highperformanceformat.com/4a7874126c1fbbe640e4d51fc61d5fe6/invoke.js"></script>
       </div>
-    </div> <!-- ✅ Closing .chat-container -->
-  </div> <!-- ✅ Closing .main-wrapper -->
+    </div>
+  </div>
 
   <script>
     async function sendMessage() {
@@ -125,6 +183,8 @@
   </script>
 </body>
 </html>
+
+
 
 
 
