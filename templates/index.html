@@ -6,65 +6,184 @@
   <title>Nova AI</title>
   <link rel="stylesheet" href="/static/style.css" />
 
-  <!-- 🔥 Google AdSense Auto Ads -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1830051360409760"
-    crossorigin="anonymous"></script>
+  <!-- 🔥 Google AdSense Auto Ads (optional) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1830051360409760" crossorigin="anonymous"></script>
 
   <style>
-    html, body {
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      height: 100%;
-      overflow-x: hidden;
-      font-family: sans-serif;
-      background: #f4f4f4;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f5f7;
+      color: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      overflow-y: auto;
     }
 
     .main-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-      padding: 30px 15px;
+      width: 100%;
+      max-width: 800px;
+      padding: 20px;
+      margin: 0 auto;
     }
 
     .chat-container {
-      width: 100%;
-      max-width: 600px;
-      background: #fff;
-      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      height: 90vh;
+      gap: 16px;
+      border: 1px solid #e0e0e0;
       border-radius: 16px;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+      padding: 24px;
+      background: #ffffff;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      margin: 8px 0;
+      color: #222;
+      text-align: center;
+    }
+
+    .credit {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #555;
+      text-align: center;
+    }
+
+    .credit a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .timer-display {
+      font-size: 0.9rem;
+      color: #666;
+      text-align: center;
     }
 
     #chat-box {
-      max-height: 400px;
+      flex-grow: 1;
+      background: #fafafa;
+      padding: 16px;
       overflow-y: auto;
-      margin-bottom: 10px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+      scroll-behavior: smooth;
     }
 
-    input[type="text"] {
+    .user, .bot {
+      margin: 10px 0;
+      padding: 14px 18px;
+      border-radius: 12px;
+      line-height: 1.6;
+      max-width: 85%;
+      word-wrap: break-word;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+    }
+
+    .user {
+      background: #007aff;
+      color: #fff;
+      align-self: flex-end;
+    }
+
+    .bot {
+      background: #e0e0e0;
+      color: #222;
+      align-self: flex-start;
+    }
+
+    #user-input {
       width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      margin-bottom: 10px;
-      font-size: 1rem;
-      border-radius: 8px;
+      height: 44px;
+      padding: 10px 16px;
+      font-size: 16px;
       border: 1px solid #ccc;
+      border-radius: 12px;
+      background: #fff;
+      color: #000;
+      resize: none;
+    }
+
+    #user-input:focus {
+      border-color: #007aff;
     }
 
     button {
-      padding: 10px 20px;
-      font-size: 1rem;
-      border: none;
-      border-radius: 8px;
-      background-color: #007bff;
+      padding: 14px 24px;
+      background: linear-gradient(to right, #007aff, #0051d4);
       color: white;
+      border: none;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: bold;
       cursor: pointer;
+      transition: background 0.2s ease;
+      margin-top: 10px;
     }
 
     button:hover {
-      background-color: #0056b3;
+      background: linear-gradient(to right, #0051d4, #003ba5);
+    }
+
+    .ad-wrapper {
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    .ad-container {
+      background: #fff;
+      padding: 16px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    }
+
+    @media (max-width: 600px) {
+      .chat-container {
+        height: 95vh;
+        padding: 16px;
+      }
+
+      #chat-box {
+        font-size: 14px;
+      }
+
+      #user-input, button {
+        font-size: 14px;
+        width: 100%;
+        padding: 12px;
+      }
+
+      button {
+        margin-top: 0;
+      }
+    }
+
+    .typing-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #007aff;
+      border-radius: 50%;
+      display: inline-block;
+      margin-left: 6px;
+      animation: blink 1s infinite ease-in-out;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
   </style>
 </head>
@@ -73,32 +192,22 @@
   <div class="main-wrapper">
     <div class="chat-container">
       <h1>🧠 Nova AI</h1>
-      <div style="text-align: center; margin-top: -8px; margin-bottom: 20px;">
-        <span style="font-size: 0.95rem; font-weight: 500; color: #555;">
-          🚀 Built with ❤️ by 
-          <a href="https://instagram.com/arvindra.verse" target="_blank" style="color: #007bff; text-decoration: none;">
-            Arvindra Rajput
-          </a>
-        </span>
+      <div class="credit">
+        🚀 Built with ❤️ by 
+        <a href="https://instagram.com/arvindra.verse" target="_blank">Arvindra Rajput</a>
       </div>
 
       <div id="timer" class="timer-display"></div>
       <div id="chat-box"></div>
       <input type="text" id="user-input" placeholder="Ask me anything..." />
       <button onclick="sendMessage()">Send</button>
+    </div>
 
-      <!-- 💸 Adsterra Banner Below Chat -->
-      <div style="text-align: center; margin-top: 20px; min-height: 250px;">
-        <script type="text/javascript">
-          atOptions = {
-            'key': '4a7874126c1fbbe640e4d51fc61d5fe6',
-            'format': 'iframe',
-            'height': 250,
-            'width': 300,
-            'params': {}
-          };
-        </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/4a7874126c1fbbe640e4d51fc61d5fe6/invoke.js"></script>
+    <!-- 💸 Separate Ad Box -->
+    <div class="ad-wrapper">
+      <div class="ad-container">
+        <script async="async" data-cfasync="false" src="//pl27070359.profitableratecpm.com/a1c78c9b52fb4a9425675b44989f5b38/invoke.js"></script>
+        <div id="container-a1c78c9b52fb4a9425675b44989f5b38"></div>
       </div>
     </div>
   </div>
@@ -183,6 +292,7 @@
   </script>
 </body>
 </html>
+
 
 
 
