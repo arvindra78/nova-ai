@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,17 +8,11 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-79KY3HDTJ5');
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nova AI</title>
-  <link rel="stylesheet" href="/static/style.css" />
-
-  <!-- 🔥 Google AdSense Auto Ads (optional) -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1830051360409760" crossorigin="anonymous"></script>
-
   <style>
     * {
       box-sizing: border-box;
@@ -26,173 +21,146 @@
     }
 
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f5f5f7;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #fafafa;
       color: #000;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      line-height: 1.6;
       padding: 20px;
-      overflow-y: auto;
     }
 
     .main-wrapper {
-      width: 100%;
-      max-width: 800px;
-      padding: 20px;
-      margin: 0 auto;
+      max-width: 780px;
+      margin: 2rem auto;
     }
 
     .chat-container {
-      display: flex;
-      flex-direction: column;
-      height: 90vh;
-      gap: 16px;
-      border: 1px solid #e0e0e0;
-      border-radius: 16px;
-      padding: 24px;
-      background: #ffffff;
-      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+      border-left: 4px solid #000;
+      padding-left: 24px;
+      background: #fff;
     }
 
     h1 {
-      font-size: 1.6rem;
-      margin: 8px 0;
-      color: #222;
-      text-align: center;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 8px;
     }
 
     .credit {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: #555;
-      text-align: center;
+      margin-bottom: 20px;
     }
 
     .credit a {
-      color: #007bff;
+      color: #000;
       text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .timer-display {
       font-size: 0.9rem;
       color: #666;
-      text-align: center;
+      margin-bottom: 16px;
     }
 
     #chat-box {
-      flex-grow: 1;
-      background: #fafafa;
-      padding: 16px;
+      height: 60vh;
       overflow-y: auto;
-      border-radius: 12px;
-      border: 1px solid #ddd;
-      font-size: 16px;
+      padding: 12px 0;
       scroll-behavior: smooth;
     }
 
     .user, .bot {
-      margin: 10px 0;
+      margin: 12px 0;
       padding: 14px 18px;
-      border-radius: 12px;
-      line-height: 1.6;
       max-width: 85%;
       word-wrap: break-word;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s;
     }
 
     .user {
-      background: #007aff;
+      background: #000;
       color: #fff;
-      align-self: flex-end;
+      border-radius: 16px 16px 0 16px;
+      margin-left: auto;
     }
 
     .bot {
-      background: #e0e0e0;
-      color: #222;
-      align-self: flex-start;
+      background: #f0f0f0;
+      color: #000;
+      border-radius: 16px 16px 16px 0;
+      border-left: 4px solid #000;
     }
 
     #user-input {
       width: 100%;
-      height: 44px;
-      padding: 10px 16px;
+      padding: 12px 16px;
       font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 12px;
-      background: #fff;
-      color: #000;
-      resize: none;
-    }
-
-    #user-input:focus {
-      border-color: #007aff;
+      border: 2px solid #000;
+      border-radius: 8px;
+      margin-top: 16px;
     }
 
     button {
-      padding: 14px 24px;
-      background: linear-gradient(to right, #007aff, #0051d4);
-      color: white;
-      border: none;
-      border-radius: 999px;
-      font-size: 16px;
-      font-weight: bold;
+      padding: 12px 24px;
+      background: #000;
+      color: #fff;
+      border: 2px solid #000;
+      border-radius: 8px;
+      font-weight: 600;
       cursor: pointer;
-      transition: background 0.2s ease;
-      margin-top: 10px;
+      transition: all 0.3s;
+      margin-top: 12px;
     }
 
     button:hover {
-      background: linear-gradient(to right, #0051d4, #003ba5);
+      background: #fff;
+      color: #000;
+    }
+
+    .typing-wave {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      height: 20px;
+    }
+
+    .typing-wave span {
+      display: inline-block;
+      width: 6px;
+      height: 12px;
+      background: #000;
+      animation: wave 1s infinite ease-in-out;
+    }
+
+    .typing-wave span:nth-child(2) { animation-delay: 0.1s; }
+    .typing-wave span:nth-child(3) { animation-delay: 0.2s; }
+
+    @keyframes wave {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
     }
 
     .ad-wrapper {
-      margin-top: 25px;
-      text-align: center;
+      margin-top: 32px;
     }
 
-    .ad-container {
-      background: #fff;
-      padding: 16px;
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    .ad-label {
+      font-size: 0.8rem;
+      color: #999;
+      margin-bottom: 8px;
     }
 
     @media (max-width: 600px) {
       .chat-container {
-        height: 95vh;
-        padding: 16px;
+        padding-left: 16px;
+        border-left-width: 3px;
       }
 
       #chat-box {
-        font-size: 14px;
+        height: 65vh;
       }
-
-      #user-input, button {
-        font-size: 14px;
-        width: 100%;
-        padding: 12px;
-      }
-
-      button {
-        margin-top: 0;
-      }
-    }
-
-    .typing-dot {
-      width: 8px;
-      height: 8px;
-      background-color: #007aff;
-      border-radius: 50%;
-      display: inline-block;
-      margin-left: 6px;
-      animation: blink 1s infinite ease-in-out;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
     }
   </style>
 </head>
@@ -200,23 +168,23 @@
 <body>
   <div class="main-wrapper">
     <div class="chat-container">
-      <h1>🧠 Nova AI</h1>
+      <h1>NOVA</h1>
       <div class="credit">
-        🚀 Built with ❤️ by 
-        <a href="https://instagram.com/arvindra.verse" target="_blank">Arvindra Rajput</a>
+        <a href="https://instagram.com/arvindra.verse" target="_blank">
+          <span>⚡</span> Built by Arvindra
+        </a>
       </div>
 
       <div id="timer" class="timer-display"></div>
       <div id="chat-box"></div>
-      <input type="text" id="user-input" placeholder="Ask me anything..." />
+      <input type="text" id="user-input" placeholder="Ask me anything..." autofocus />
       <button onclick="sendMessage()">Send</button>
     </div>
 
-    <!-- 💸 Separate Ad Box -->
     <div class="ad-wrapper">
+      <p class="ad-label">Sponsored</p>
       <div class="ad-container">
-        <script async="async" data-cfasync="false" src="//pl27070359.profitableratecpm.com/a1c78c9b52fb4a9425675b44989f5b38/invoke.js"></script>
-        <div id="container-a1c78c9b52fb4a9425675b44989f5b38"></div>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1830051360409760" crossorigin="anonymous"></script>
       </div>
     </div>
   </div>
@@ -230,23 +198,22 @@
 
       if (!message.trim()) return;
 
-      chatBox.innerHTML += `<div class='user'>You: ${message}</div>`;
+      chatBox.innerHTML += `<div class='user'>${message}</div>`;
       input.value = "";
 
       const botDiv = document.createElement("div");
       botDiv.className = "bot";
-      const typingSpan = document.createElement("span");
-      botDiv.appendChild(typingSpan);
-
-      const dot = document.createElement("span");
-      dot.className = "typing-dot";
-      typingSpan.appendChild(dot);
+      
+      const typingWave = document.createElement("div");
+      typingWave.className = "typing-wave";
+      typingWave.innerHTML = `<span></span><span></span><span></span>`;
+      botDiv.appendChild(typingWave);
 
       chatBox.appendChild(botDiv);
       chatBox.scrollTop = chatBox.scrollHeight;
 
       const startTime = performance.now();
-      timerDisplay.textContent = "⏳ Waiting...";
+      timerDisplay.textContent = "⏳ Thinking...";
 
       const res = await fetch("/chat", {
         method: "POST",
@@ -259,54 +226,34 @@
 
       const endTime = performance.now();
       const duration = ((endTime - startTime) / 1000).toFixed(2);
-      timerDisplay.textContent = `⏱️ Responded in ${duration}s`;
+      timerDisplay.textContent = `⏱️ ${duration}s`;
 
-      const tempDiv = document.createElement("div");
-      tempDiv.innerHTML = fullReply;
-      const parsed = tempDiv.childNodes;
-
-      function typeHTML(nodeList, currentNodeIndex = 0, currentCharIndex = 0, parent = typingSpan) {
-        if (currentNodeIndex >= nodeList.length) return;
-
-        const node = nodeList[currentNodeIndex];
-
-        if (node.nodeType === Node.TEXT_NODE) {
-          const text = node.textContent;
-          if (currentCharIndex < text.length) {
-            parent.innerHTML += text.charAt(currentCharIndex);
-            chatBox.scrollTop = chatBox.scrollHeight;
-            setTimeout(() => {
-              typeHTML(nodeList, currentNodeIndex, currentCharIndex + 1, parent);
-            }, 5);
-          } else {
-            typeHTML(nodeList, currentNodeIndex + 1, 0, parent);
-          }
-        } else if (node.nodeType === Node.ELEMENT_NODE) {
-          const clone = document.createElement(node.tagName);
-          parent.appendChild(clone);
-          typeHTML(node.childNodes, 0, 0, clone);
-          typeHTML(nodeList, currentNodeIndex + 1, 0, parent);
-        }
-      }
-
-      typeHTML(parsed);
+      botDiv.removeChild(typingWave);
+      botDiv.innerHTML = fullReply;
+      chatBox.scrollTop = chatBox.scrollHeight;
     }
 
-    document.getElementById("user-input").addEventListener("keydown", function (e) {
-      if (e.key === "Enter" && !e.shiftKey) {
+    document.getElementById("user-input").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
         e.preventDefault();
         sendMessage();
+      }
+    });
+
+    // Hover effects
+    document.addEventListener('mouseover', (e) => {
+      if (e.target.classList.contains('user') || e.target.classList.contains('bot')) {
+        e.target.style.transform = 'scale(1.02)';
+      }
+    });
+
+    document.addEventListener('mouseout', (e) => {
+      if (e.target.classList.contains('user') || e.target.classList.contains('bot')) {
+        e.target.style.transform = 'scale(1)';
       }
     });
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
 
  
